@@ -1,0 +1,20 @@
+using Microsoft.EntityFrameworkCore;
+using Application.Models;
+
+namespace Application.Data;
+
+public class ApplicationDbContext : DbContext
+{
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+
+    public DbSet<User> Users { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<User>().HasData(
+            new User { Id = 1, FirstName = "Rob", LastName = "Top", Age = 25 },
+            new User { Id = 2, FirstName = "Mari", LastName = "Fredrikson", Age = 20 },
+            new User { Id = 3, FirstName = "Martin", LastName = "Novak", Age = 35 }
+        );
+    }
+}

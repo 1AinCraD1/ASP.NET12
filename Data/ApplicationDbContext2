@@ -1,0 +1,22 @@
+using Microsoft.EntityFrameworkCore;
+using CompanyApp.Models;
+
+namespace CompanyApp.Data;
+
+public class ApplicationDbContext : DbContext
+{
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+
+    public DbSet<Company> Companies { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Company>().HasData(
+            new Company { Id = 1, Name = "TechCorp", Industry = "IT", NumberOfEmployees = 500, Country = "USA" },
+            new Company { Id = 2, Name = "BioHealth", Industry = "Healthcare", NumberOfEmployees = 300, Country = "Germany" },
+            new Company { Id = 3, Name = "AgroWorld", Industry = "Agriculture", NumberOfEmployees = 200, Country = "Ukraine" },
+            new Company { Id = 4, Name = "EduGlobal", Industry = "Education", NumberOfEmployees = 150, Country = "Canada" },
+            new Company { Id = 5, Name = "AutoMakers", Industry = "Automotive", NumberOfEmployees = 1000, Country = "Japan" }
+        );
+    }
+}
